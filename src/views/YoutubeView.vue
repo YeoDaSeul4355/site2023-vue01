@@ -1,6 +1,6 @@
 <template>
   <ContTitle title="youtube" />
-  <YoutubeSlider />
+  <YoutubeSlider :youtubes="youtubes" />
   <YoutubeSearch />
   <YoutubeTag />
   <YoutubeCont :youtubes="youtubes" />
