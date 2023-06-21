@@ -52,6 +52,7 @@ export default {
 </script>
 
 <style lang="scss">
+@import "@/assets/scss/setting/mixins.scss";
 .intro__inner {
   display: flex;
   justify-content: space-between;

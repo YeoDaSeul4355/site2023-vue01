@@ -64,7 +64,7 @@ export default {
           iconImg03: "./images/slider/slider_icon13.png",
         },
         {
-          title: "PEICE <br />OF WORK",
+          title: "PIECE <br />OF WORK",
           desc: "근•현대 대표 화가들의 작품들을 <br />감상해보세요!",
           iconImg01: "./images/slider/slider_icon03.png",
           iconImg02: "./images/slider/slider_icon07.png",
@@ -103,6 +103,7 @@ export default {
 
 <style lang="scss">
 // slider__wrap
+@import "@/assets/scss/setting/mixins.scss";
 .swiper {
   overflow: visible;
 }

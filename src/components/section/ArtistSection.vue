@@ -34,6 +34,7 @@
   </section>
 </template>
 <style lang="scss">
+@import "@/assets/scss/setting/mixins.scss";
 .images__inner {
   @include flex-between;
 

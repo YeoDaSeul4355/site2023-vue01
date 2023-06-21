@@ -80,6 +80,7 @@ export default {
 };
 </script>
 <style lang="scss">
+@import "@/assets/scss/setting/mixins.scss";
 .cards__inner {
   .cards__btn {
     margin-bottom: 30px;
