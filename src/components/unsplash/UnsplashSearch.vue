@@ -1,17 +1,51 @@
 <template>
-  <div className="unsplash__search container">
-    <h2 className="blind">검색하기</h2>
+  <div class="unsplash__search container">
+    <h2 class="blind">검색하기</h2>
     <input
+      ref="inputRef"
+      @keypress="onKeyPress"
       type="search"
-      ref="{inputRef}"
-      onKeyPress="{onKeyPress}"
       placeholder="이미지를 검색하세요!"
     />
-    <!-- <button type="submit" onClick="{onClick}" className="button-yellow">
+    <button type="submit" @click="onClick" class="button-yellow">
       검색하기
-    </button> -->
+    </button>
   </div>
 </template>
+<script>
+export default {
+  mounted() {
+    this.$nextTick(() => {
+      this.inputRef = this.$refs.inputRef;
+    });
+  },
+  methods: {
+    handleSearch() {
+      const value = this.inputRef.value;
+      this.onSearch(value);
+    },
+    onKeyPress(event) {
+      if (event.key === "Enter") {
+        this.handleSearch();
+      }
+    },
+    onClick() {
+      this.handleSearch();
+    },
+  },
+  data() {
+    return {
+      inputRef: null,
+    };
+  },
+  props: {
+    onSearch: {
+      type: Function,
+      required: true,
+    },
+  },
+};
+</script>
 <style lang="scss" scoped>
 @import "@/assets/scss/setting/mixins.scss";
 .unsplash__search {

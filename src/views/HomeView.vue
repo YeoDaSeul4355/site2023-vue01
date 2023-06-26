@@ -20,8 +20,8 @@ import MovieSection from "@/components/section/MovieSection.vue";
 
 export default {
   components: {
-    IntroSection,
     SliderSection,
+    IntroSection,
     CardSection,
     YoutubeSection,
     UnsplashSection,

@@ -1,8 +1,8 @@
 <template>
   <ContTitle title="unsplash" />
-  <UnsplashSlider />
-  <UnsplashSearch />
-  <UnsplashTag />
+  <UnsplashSlider :sliderImages="sliderImages" />
+  <UnsplashSearch @search="SearchImage" />
+  <UnsplashTag @search="SearchImage" />
   <UnsplashCont :images="images" />
 </template>
 
@@ -26,6 +26,7 @@ export default {
 
   setup() {
     const images = ref([]);
+    const sliderImages = ref([]);
 
     const TopImages = async () => {
       await fetch(
@@ -40,9 +41,36 @@ export default {
     };
     TopImages();
 
+    const SearchImage = async (query) => {
+      await fetch(
+        `https://api.unsplash.com/search/photos?client_id=HWsGXX5NmVoWI3FflAtezFOkvUNF4Wr7dJ-UFcw2UNc&per_page=30&query=${query}`
+      )
+        .then((response) => response.json())
+        .then((result) => {
+          images.value = result.results;
+        })
+        .catch((error) => console.log(error));
+    };
+
+    const SliderImages = () => {
+      fetch(
+        `https://api.unsplash.com/photos?client_id=HWsGXX5NmVoWI3FflAtezFOkvUNF4Wr7dJ-UFcw2UNc&per_page=30`
+      )
+        .then((response) => response.json())
+        .then((result) => {
+          sliderImages.value = result.filter(
+            (image) => image.width > image.height
+          );
+        })
+        .catch((error) => console.log(error));
+    };
+    SliderImages();
     return {
-      TopImages,
       images,
+      sliderImages,
+      TopImages,
+      SearchImage,
+      SliderImages,
     };
   },
 };

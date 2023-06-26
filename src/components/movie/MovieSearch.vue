@@ -2,16 +2,49 @@
   <div class="movie__search container">
     <h2 class="blind">검색하기</h2>
     <input
+      ref="inputRef"
+      @keypress="onKeyPress"
       type="search"
-      ref="{inputRef}"
-      onKeyPress="{onKeyPress}"
       placeholder="영화를 검색하세요!"
     />
-    <!-- <button type="submit" onClick="{onClick}" class="button-blue">
-      검색하기
-    </button> -->
+    <button type="submit" @click="onClick" class="button-blue">검색하기</button>
   </div>
 </template>
+
+<script>
+export default {
+  mounted() {
+    this.$nextTick(() => {
+      this.inputRef = this.$refs.inputRef;
+    });
+  },
+  methods: {
+    handleSearch() {
+      const value = this.inputRef.value;
+      this.onSearch(value);
+    },
+    onKeyPress(event) {
+      if (event.key === "Enter") {
+        this.handleSearch();
+      }
+    },
+    onClick() {
+      this.handleSearch();
+    },
+  },
+  data() {
+    return {
+      inputRef: null,
+    };
+  },
+  props: {
+    onSearch: {
+      type: Function,
+      required: true,
+    },
+  },
+};
+</script>
 <style lang="scss">
 @import "@/assets/scss/setting/mixins.scss";
 .movie__search {
